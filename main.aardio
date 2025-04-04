@@ -1,0 +1,90 @@
+import win.ui;
+import fsys.dlg;
+import fsys.dlg.dir;
+import console;
+//引用ffmpeg库
+import process;
+/*DSG{{*/
+mainForm = win.form(text="IKUN视频压缩";right=647;bottom=463)
+mainForm.add(
+button={cls="button";text="选择视频目录";left=520;top=48;right=608;bottom=80;ah=1;aw=1;z=1};
+button1={cls="button";text="输出位置";left=520;top=104;right=608;bottom=136;ah=1;aw=1;z=3};
+button3={cls="button";text="开始压缩";left=520;top=232;right=608;bottom=264;ah=1;aw=1;z=10};
+dx={cls="radiobutton";left=120;top=176;right=136;bottom=192;ah=1;aw=1;z=7};
+dx1={cls="radiobutton";left=280;top=176;right=296;bottom=192;ah=1;aw=1;z=9};
+dx2={cls="radiobutton";left=440;top=176;right=456;bottom=192;ah=1;aw=1;z=8};
+edit={cls="edit";left=56;top=48;right=456;bottom=80;ah=1;aw=1;edge=1;multiline=1;z=2};
+edit1={cls="edit";left=56;top=104;right=456;bottom=136;ah=1;aw=1;edge=1;z=11};
+static={cls="static";text="无损压缩";left=56;top=176;right=128;bottom=192;ah=1;aw=1;notify=1;transparent=1;z=4};
+static2={cls="static";text="均衡压缩";left=208;top=176;right=280;bottom=192;ah=1;aw=1;notify=1;transparent=1;z=5};
+static3={cls="static";text="极限压缩";left=360;top=176;right=432;bottom=192;ah=1;aw=1;notify=1;transparent=1;z=6}
+)
+/*}}*/
+
+mainForm.static.oncommand = function(id,event){
+	
+}
+
+mainForm.edit.oncommand = function(id,event){
+	
+}
+
+mainForm.button.oncommand = function(id,event){
+	// 打开目录选择对话框(dirpath是一个定义的变量)
+	shuru = fsys.dlg.dir(); 
+	// 如果用户选择了目录
+    if (shuru) { 
+        // 将路径显示在 edit 控件中
+        mainForm.edit.text = shuru; 
+    } 
+}
+
+mainForm.dx.oncommand = function(id,event){
+	//点击dx后变为
+	ffmpeg_config = "-i %s -vcodec libx264 -crf 23.5 -preset medium -acodec aac -b:a 128k %s";
+}
+
+mainForm.dx1.oncommand = function(id,event){
+	//点击dx1后变为
+	ffmpeg_config = "-i %s -vcodec libx264 -crf 30 -preset medium -acodec aac -b:a 128k %s";
+}
+
+mainForm.dx2.oncommand = function(id,event){
+	//点击dx2后变为
+	ffmpeg_config = "-i %s -vcodec libx264 -crf 35 -preset medium -acodec aac -b:a 128k %s";
+}
+
+mainForm.button1.oncommand = function(id,event){
+	//选择文件(可多选),定义fsys.dlg.openEx()这个变量为xz
+	shuchu = fsys.dlg.dir();
+	if (shuchu) { 
+        // 将路径显示在 edit 控件中
+        mainForm.edit1.text = shuchu; 
+    }  
+}
+
+mainForm.button3.oncommand = function(id,event){
+  //遍历视频目录下的视频文件
+  //检查目录下的mp4格式的视频
+  fsys.enum(shuru, "*.mp4",
+  function(dirname, filename, fullpath, findData) {
+    if (filename) {
+        //构建输出路径
+        var output_file = shuchu + '/' + filename;
+        //构建ffmpeg命令
+        var ffmpeg = string.format(
+            ffmpeg_config,
+            '"' + fullpath + '"',
+            '"' + output_file + '"'
+        );
+        var ffmpeg_cmd = process('./tools/ffmpeg.exe', ffmpeg).wait();
+    }
+  },
+  false
+);
+win.msgbox("视频压缩完成！",提示);
+}
+
+
+mainForm.show();
+return win.loopMessage();
