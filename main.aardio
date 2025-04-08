@@ -1,90 +1,119 @@
+import fonts.fontAwesome;
 import win.ui;
+import win.ui.menu;
+import console;
+import process;
 import fsys.dlg;
 import fsys.dlg.dir;
-import console;
-//引用ffmpeg库
-import process;
 /*DSG{{*/
-mainForm = win.form(text="IKUN视频压缩";right=647;bottom=463)
+mainForm = win.form(text="IKUN视频压缩";right=715;bottom=391)
 mainForm.add(
-button={cls="button";text="选择视频目录";left=520;top=48;right=608;bottom=80;ah=1;aw=1;z=1};
-button1={cls="button";text="输出位置";left=520;top=104;right=608;bottom=136;ah=1;aw=1;z=3};
-button3={cls="button";text="开始压缩";left=520;top=232;right=608;bottom=264;ah=1;aw=1;z=10};
-dx={cls="radiobutton";left=120;top=176;right=136;bottom=192;ah=1;aw=1;z=7};
-dx1={cls="radiobutton";left=280;top=176;right=296;bottom=192;ah=1;aw=1;z=9};
-dx2={cls="radiobutton";left=440;top=176;right=456;bottom=192;ah=1;aw=1;z=8};
-edit={cls="edit";left=56;top=48;right=456;bottom=80;ah=1;aw=1;edge=1;multiline=1;z=2};
-edit1={cls="edit";left=56;top=104;right=456;bottom=136;ah=1;aw=1;edge=1;z=11};
-static={cls="static";text="无损压缩";left=56;top=176;right=128;bottom=192;ah=1;aw=1;notify=1;transparent=1;z=4};
-static2={cls="static";text="均衡压缩";left=208;top=176;right=280;bottom=192;ah=1;aw=1;notify=1;transparent=1;z=5};
-static3={cls="static";text="极限压缩";left=360;top=176;right=432;bottom=192;ah=1;aw=1;notify=1;transparent=1;z=6}
+plus1={cls="plus";left=69;top=76;right=473;bottom=106;ah=1;align="left";aw=1;border={color=-16777216;radius=2;width=1};editable=1;font=LOGFONT(h=-14);textPadding={top=6;bottom=2};z=12};
+plus2={cls="plus";left=69;top=146;right=473;bottom=176;ah=1;align="left";aw=1;border={color=-16777216;radius=2;width=1};editable=1;font=LOGFONT(h=-14);textPadding={top=6;bottom=2};z=5};
+plus3={cls="plus";text="目录";left=542;top=75;right=641;bottom=105;ah=1;align="left";aw=1;bgcolor=-2575250;font=LOGFONT(h=-16);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=20}};iconText='\uF115';notify=1;textPadding={left=39};z=2};
+plus4={cls="plus";text="输出";left=541;top=145;right=641;bottom=175;ah=1;align="left";aw=1;bgcolor=-2575250;font=LOGFONT(h=-16);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=20}};iconText='\uF07B';notify=1;textPadding={left=39};z=4};
+plus5={cls="plus";text="压缩";left=541;top=252;right=640;bottom=282;ah=1;align="left";aw=1;bgcolor=-2575250;font=LOGFONT(h=-16);iconStyle={align="left";font=LOGFONT(h=-13;name='FontAwesome');padding={left=20}};iconText='\uF251';notify=1;textPadding={left=39};z=3};
+radiobutton1={cls="radiobutton";left=66;top=261;right=80;bottom=276;ah=1;aw=1;z=6};
+radiobutton2={cls="radiobutton";left=214;top=261;right=228;bottom=275;ah=1;aw=1;z=7};
+radiobutton3={cls="radiobutton";left=372;top=261;right=386;bottom=275;ah=1;aw=1;z=8};
+static1={cls="static";text="批量压缩";left=66;top=32;right=157;bottom=56;ah=1;aw=1;font=LOGFONT(h=-14;weight=700);transparent=1;z=1};
+static2={cls="static";text="无损压缩";left=102;top=260;right=161;bottom=282;ah=1;aw=1;notify=1;transparent=1;z=9};
+static3={cls="static";text="推荐压缩";left=251;top=260;right=310;bottom=282;notify=1;transparent=1;z=10};
+static4={cls="static";text="极限压缩";left=407;top=261;right=466;bottom=283;ah=1;aw=1;notify=1;transparent=1;z=11}
 )
 /*}}*/
 
-mainForm.static.oncommand = function(id,event){
-	
+mainForm.plus1.setCueBannerText("请选择视频目录,目录下只能有视频文件")
+mainForm.plus2.setCueBannerText("请选择输出目录")
+
+
+mainForm.plus1.skin({
+	background={
+		default=0xFFFFFFFF		
+	}
+})
+
+mainForm.plus2.skin({
+	background={
+		default=0xFFFFFFFF		
+	}
+})
+
+mainForm.plus3.skin({
+	background={
+		default=0x446EB4D8;
+		disabled=0xFFCCCCCC;
+		hover=0x40738DDA		
+	};
+	color={
+		default=0xFF000000;
+		disabled=0xFF6D6D6D		
+	}
+})
+
+mainForm.plus4.skin({
+	background={
+		default=0x446EB4D8;
+		disabled=0xFFCCCCCC;
+		hover=0x40738DDA		
+	};
+	color={
+		default=0xFF000000;
+		disabled=0xFF6D6D6D		
+	}
+})
+
+mainForm.plus5.skin({
+	background={
+		default=0x446EB4D8;
+		disabled=0xFFCCCCCC;
+		hover=0x40738DDA		
+	};
+	color={
+		default=0xFF000000;
+		disabled=0xFF6D6D6D		
+	}
+})
+
+mainForm.plus3.oncommand = function(id,event){
+	fsys_dlg_dir = fsys.dlg.dir();
+	mainForm.plus1.text = fsys_dlg_dir;
 }
 
-mainForm.edit.oncommand = function(id,event){
-	
+mainForm.plus4.oncommand = function(id,event){
+	fsys_dlg_openDir = fsys.dlg.openDir();
+	mainForm.plus2.text = fsys_dlg_openDir;
 }
 
-mainForm.button.oncommand = function(id,event){
-	// 打开目录选择对话框(dirpath是一个定义的变量)
-	shuru = fsys.dlg.dir(); 
-	// 如果用户选择了目录
-    if (shuru) { 
-        // 将路径显示在 edit 控件中
-        mainForm.edit.text = shuru; 
-    } 
+mainForm.radiobutton1.oncommand = function(id,event){
+	dx =  "-i %s -vcodec libx264 -crf 23.5 -preset medium -acodec aac -b:a 128k %s";
 }
 
-mainForm.dx.oncommand = function(id,event){
-	//点击dx后变为
-	ffmpeg_config = "-i %s -vcodec libx264 -crf 23.5 -preset medium -acodec aac -b:a 128k %s";
+mainForm.radiobutton2.oncommand = function(id,event){
+	dx =  "-i %s -vcodec libx264 -crf 30 -preset medium -acodec aac -b:a 128k %s";
 }
 
-mainForm.dx1.oncommand = function(id,event){
-	//点击dx1后变为
-	ffmpeg_config = "-i %s -vcodec libx264 -crf 30 -preset medium -acodec aac -b:a 128k %s";
+mainForm.radiobutton3.oncommand = function(id,event){
+	dx =  "-i %s -vcodec libx264 -crf 40 -preset medium -acodec aac -b:a 128k %s";
 }
 
-mainForm.dx2.oncommand = function(id,event){
-	//点击dx2后变为
-	ffmpeg_config = "-i %s -vcodec libx264 -crf 35 -preset medium -acodec aac -b:a 128k %s";
-}
-
-mainForm.button1.oncommand = function(id,event){
-	//选择文件(可多选),定义fsys.dlg.openEx()这个变量为xz
-	shuchu = fsys.dlg.dir();
-	if (shuchu) { 
-        // 将路径显示在 edit 控件中
-        mainForm.edit1.text = shuchu; 
-    }  
-}
-
-mainForm.button3.oncommand = function(id,event){
-  //遍历视频目录下的视频文件
-  //检查目录下的mp4格式的视频
-  fsys.enum(shuru, "*.mp4",
+mainForm.plus5.oncommand = function(id,event){	
+console.setTitle("ikun视频批量压缩");
+ fsys.enum(fsys_dlg_dir, "*.*",
   function(dirname, filename, fullpath, findData) {
     if (filename) {
         //构建输出路径
-        var output_file = shuchu + '/' + filename;
+        var output_file = fsys_dlg_openDir + '/' + filename;
         //构建ffmpeg命令
-        var ffmpeg = string.format(
-            ffmpeg_config,
-            '"' + fullpath + '"',
-            '"' + output_file + '"'
-        );
-        var ffmpeg_cmd = process('./tools/ffmpeg.exe', ffmpeg).wait();
+        var ffmpeg = string.format(dx,'"' + fullpath + '"','"' + output_file + '"');
+        process('./tools/ffmpeg.exe', ffmpeg).wait();
     }
   },
   false
 );
-win.msgbox("视频压缩完成！",提示);
-}
-
+console.close();
+win.msgbox("视频压缩完成！", "提示");
+};
 
 mainForm.show();
 return win.loopMessage();

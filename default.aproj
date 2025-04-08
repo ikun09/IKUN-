@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<project ver="10" name="IKUN视频压缩" libEmbed="true" icon="..." ui="win" output="IKUN视频压缩.exe" CompanyName="单位名称" FileDescription="IKUN视频压缩" LegalCopyright="IKUN (C) 作者 2025" ProductName="IKUN视频压缩" InternalName="IKUN视频压缩" FileVersion="0.1.0.1" ProductVersion="0.1.0.1" publishDir="/dist/" dstrip="false">
+<project ver="10" name="IKUN视频压缩" libEmbed="true" icon="C:\Users\IKUN\Desktop\ikun.ico" ui="win" output="ikun视频压缩.exe" CompanyName="单位名称" FileDescription="0.9" LegalCopyright="Copyright (C) 作者 2025" ProductName="0.9" InternalName="0.9" FileVersion="0.0.0.25" ProductVersion="0.0.0.25" publishDir="/dist/" dstrip="false" local="false" ignored="false">
 	<file name="main.aardio" path="main.aardio" comment="main.aardio"/>
-	<folder name="资源文件" path="res" embed="true"/>
-	<folder name="窗体文件" path="dlg" comment="目录" embed="true"/>
+	<folder name="资源文件" path="res" embed="true" local="false" ignored="false"/>
+	<folder name="窗体文件" path="dlg" comment="目录" embed="true" local="false" ignored="false"/>
 </project>
