@@ -1,7 +1,9 @@
 # IKUN视频压缩
 **IKUN视频压缩是一个基于ffmpeg的gui程序，使用的arrdio编程语言开发。**
 
-开源地址：[https://github.com/ikun09/IKUN-VC](https://github.com/ikun09/IKUN-VC)
+github开源地址：[https://github.com/ikun09/IKUN-VC](https://github.com/ikun09/IKUN-VC)
+
+gitee开源地址：[https://gitee.com/ikun09/IKUN-VC](https://gitee.com/ikun09/IKUN-VC)
 
 蓝奏云下载链接：[https://wwnk.lanzouu.com/iU8G02t06zoh](https://wwnk.lanzouu.com/iU8G02t06zoh)
 
